@@ -9,9 +9,11 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Build APK
+      - name: Install Gradle
         run: |
-          chmod +x gradlew 2>/dev/null || true
+          wget -q https://services.gradle.org/distributions/gradle-8.4-bin.zip
+          unzip -q gradle-8.4-bin.zip
+          export PATH=$PWD/gradle-8.4/bin:$PATH
           gradle assembleDebug
       - uses: actions/upload-artifact@v3
         with:
